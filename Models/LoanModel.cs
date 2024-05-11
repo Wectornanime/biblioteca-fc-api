@@ -1,3 +1,5 @@
+using biblioteca_fc_api.Enums;
+
 namespace biblioteca_fc_api.Models
 {
     public class LoanModel
@@ -8,6 +10,6 @@ namespace biblioteca_fc_api.Models
         public DateTime ReturnDate { get; set; }
         public int IdBook { get; set; }
         public int IdUser { get; set; }
-        public int Status { get; set; }
+        public LoanStatus Status { get; set; }
     }
 }
