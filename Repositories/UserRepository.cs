@@ -30,7 +30,7 @@ namespace biblioteca_fc_api.Repositories
             var user = await _dbContext.Users.FindAsync(id);
             if (user == null)
             {
-                return null;
+                throw new Exception("User not foud!");
             }
             return user;
         }
