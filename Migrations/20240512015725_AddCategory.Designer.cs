@@ -51,7 +51,7 @@ namespace biblioteca_fc_api.Migrations
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("biblioteca_fc_api.Models.CategoryModel", b =>
+            modelBuilder.Entity("biblioteca_fc_api.Models.Categorys", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -62,7 +62,7 @@ namespace biblioteca_fc_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("CategoryModel");
+                    b.ToTable("Categorys");
                 });
 
             modelBuilder.Entity("biblioteca_fc_api.Models.LoanModel", b =>
@@ -137,7 +137,7 @@ namespace biblioteca_fc_api.Migrations
 
             modelBuilder.Entity("biblioteca_fc_api.Models.BookModel", b =>
                 {
-                    b.HasOne("biblioteca_fc_api.Models.CategoryModel", "Category")
+                    b.HasOne("biblioteca_fc_api.Models.Categorys", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)

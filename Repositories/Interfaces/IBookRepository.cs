@@ -1,3 +1,4 @@
+using biblioteca_fc_api.Dtos;
 using biblioteca_fc_api.Models;
 
 namespace biblioteca_fc_api.Repositories.Interfaces

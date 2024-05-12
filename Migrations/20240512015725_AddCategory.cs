@@ -19,7 +19,7 @@ namespace biblioteca_fc_api.Migrations
                 defaultValue: 0);
 
             migrationBuilder.CreateTable(
-                name: "CategoryModel",
+                name: "Categorys",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -28,7 +28,7 @@ namespace biblioteca_fc_api.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CategoryModel", x => x.Id);
+                    table.PrimaryKey("PK_Categorys", x => x.Id);
                 })
                 .Annotation("MySQL:Charset", "utf8mb4");
 
@@ -38,10 +38,10 @@ namespace biblioteca_fc_api.Migrations
                 column: "CategoryId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Books_CategoryModel_CategoryId",
+                name: "FK_Books_Categorys_CategoryId",
                 table: "Books",
                 column: "CategoryId",
-                principalTable: "CategoryModel",
+                principalTable: "Categorys",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -50,11 +50,11 @@ namespace biblioteca_fc_api.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Books_CategoryModel_CategoryId",
+                name: "FK_Books_Categorys_CategoryId",
                 table: "Books");
 
             migrationBuilder.DropTable(
-                name: "CategoryModel");
+                name: "Categorys");
 
             migrationBuilder.DropIndex(
                 name: "IX_Books_CategoryId",

@@ -1,4 +1,5 @@
 using biblioteca_fc_api.Data;
+using biblioteca_fc_api.Dtos;
 using biblioteca_fc_api.Models;
 using biblioteca_fc_api.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -42,6 +43,7 @@ namespace biblioteca_fc_api.Repositories
             bookData.Name = book.Name;
             bookData.Author = book.Author;
             bookData.Value = book.Value;
+            bookData.CategoryId = book.CategoryId;
 
             _dbContext.Books.Update(bookData);
             await _dbContext.SaveChangesAsync();
