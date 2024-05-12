@@ -12,6 +12,9 @@ namespace biblioteca_fc_api.Data.Map
             builder.Property(x => x.Name).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Author).IsRequired().HasMaxLength(255);
             builder.Property(x => x.Value).IsRequired();
+            builder.Property(x => x.CategoryId).IsRequired();
+
+            builder.HasOne(x => x.Category);
         }
     }
 }

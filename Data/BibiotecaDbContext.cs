@@ -12,6 +12,7 @@ namespace biblioteca_fc_api.Data
         public DbSet<BookModel> Books { get; set; }
         public DbSet<LoanModel> Loans { get; set; }
         public DbSet<PenaltyModel> Penaltys { get; set; }
+        public DbSet<CategoryModel> Categorys { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

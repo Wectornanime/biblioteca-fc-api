@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using biblioteca_fc_api.Data;
 
@@ -10,9 +11,11 @@ using biblioteca_fc_api.Data;
 namespace biblioteca_fc_api.Migrations
 {
     [DbContext(typeof(BibiotecaDbContext))]
-    partial class BibiotecaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240512015725_AddCategory")]
+    partial class AddCategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -59,7 +62,7 @@ namespace biblioteca_fc_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorys");
+                    b.ToTable("CategoryModel");
                 });
 
             modelBuilder.Entity("biblioteca_fc_api.Models.LoanModel", b =>
