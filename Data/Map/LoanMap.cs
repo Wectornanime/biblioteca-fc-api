@@ -9,18 +9,12 @@ namespace biblioteca_fc_api.Data.Map
         public void Configure(EntityTypeBuilder<LoanModel> builder)
         {
             builder.HasKey(x => x.Id);
-            
-
-
-        builder.Property(x => x.LoanDate).IsRequired();
-        builder.Property(x => x.ExpectedReturnDate).IsRequired();
-        builder.Property(x => x.ReturnDate);
-        builder.Property(x => x.BookId).IsRequired();
-        builder.Property(x => x.UserId).IsRequired();
-        builder.Property(x => x.Status).IsRequired();
-        builder.HasOne(x => x.Penalty);
-        builder.HasOne(x => x.Book);
-        builder.HasOne(x => x.User);
+            builder.Property(x => x.LoanDate).IsRequired();
+            builder.Property(x => x.ExpectedReturnDate).IsRequired();
+            builder.Property(x => x.ReturnDate);
+            builder.Property(x => x.BookId).IsRequired();
+            builder.Property(x => x.UserId).IsRequired();
+            builder.Property(x => x.Status).IsRequired();
         }
     }
 }

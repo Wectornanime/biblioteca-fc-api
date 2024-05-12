@@ -8,6 +8,5 @@ namespace biblioteca_fc_api.Models
         public float Value { get; set; }
         public int CategoryId { get; set; }
         public CategoryModel? Category { get; set; }
-        public ICollection<LoanModel>? Loan { get; set; }
     }
 }

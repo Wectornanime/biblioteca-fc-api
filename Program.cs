@@ -21,6 +21,9 @@ builder.Services.AddEntityFrameworkMySQL()
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IPenaltyRepository, PenaltyRepository>();
+builder.Services.AddScoped<ILoanRepository, LoanRepository>();
 
 var app = builder.Build();
 

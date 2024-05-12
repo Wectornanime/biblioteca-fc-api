@@ -11,8 +11,5 @@ namespace biblioteca_fc_api.Models
         public int BookId { get; set; }
         public int UserId { get; set; }
         public LoanStatus Status { get; set; }
-        public ICollection<PenaltyModel>? Penalty { get; set; }
-        public BookModel? Book { get; set; }
-        public UserModel? User { get; set; }
     }
 }
