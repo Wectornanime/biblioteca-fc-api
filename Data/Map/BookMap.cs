@@ -15,6 +15,7 @@ namespace biblioteca_fc_api.Data.Map
             builder.Property(x => x.CategoryId).IsRequired();
 
             builder.HasOne(x => x.Category);
+            builder.HasMany(x => x.Loan);
         }
     }
 }

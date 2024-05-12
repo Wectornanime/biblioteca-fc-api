@@ -10,6 +10,7 @@ namespace biblioteca_fc_api.Data.Map
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.Name).IsRequired().HasMaxLength(150);
+            builder.HasMany(x=> x.Books);
         }
     }
 }

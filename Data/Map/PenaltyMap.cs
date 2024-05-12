@@ -11,6 +11,8 @@ namespace biblioteca_fc_api.Data.Map
             builder.HasKey(x => x.Id);
             builder.Property(x => x.PenaltyValue).IsRequired();
             builder.Property(x => x.DalayDay).IsRequired();
+            builder.Property(x => x.LoanId).IsRequired();
+            builder.HasOne(x => x.Loan);
         }
     }
 }

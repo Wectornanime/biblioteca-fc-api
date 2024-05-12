@@ -7,7 +7,7 @@ namespace biblioteca_fc_api.Models
         public string? Author { get; set; }
         public float Value { get; set; }
         public int CategoryId { get; set; }
-
-        public virtual CategoryModel? Category { get; set; }
+        public CategoryModel? Category { get; set; }
+        public ICollection<LoanModel>? Loan { get; set; }
     }
 }
