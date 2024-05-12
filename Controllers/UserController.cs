@@ -14,6 +14,13 @@ namespace biblioteca_fc_api.Controllers
             _userRepository = userRepository;
         }
 
+        [HttpPost]
+        public async Task<ActionResult<List<UserModel>>> CreateUser([FromBody] UserModel userModel)
+        {
+            List<UserModel> users = await _userRepository.CreateUser(userModel);
+            return Ok(users);
+        }
+
         [HttpGet]
         public async Task<ActionResult<List<UserModel>>> FindAllUsers()
         {
@@ -26,13 +33,6 @@ namespace biblioteca_fc_api.Controllers
         {
             UserModel user = await _userRepository.FindUserById(id);
             return Ok(user);
-        }
-
-        [HttpPost]
-        public async Task<ActionResult<List<UserModel>>> CreateUser([FromBody] UserModel userModel)
-        {
-            List<UserModel> users = await _userRepository.CreateUser(userModel);
-            return Ok(users);
         }
 
         [HttpPut("{id}")]
