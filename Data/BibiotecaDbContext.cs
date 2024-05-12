@@ -18,6 +18,9 @@ namespace biblioteca_fc_api.Data
         {
             modelBuilder.ApplyConfiguration(new UserMap());
             modelBuilder.ApplyConfiguration(new BookMap());
+            modelBuilder.ApplyConfiguration(new CategoryMap());
+            modelBuilder.ApplyConfiguration(new PenaltyMap());
+            modelBuilder.ApplyConfiguration(new LoanMap());
             base.OnModelCreating(modelBuilder);
         }
     }
