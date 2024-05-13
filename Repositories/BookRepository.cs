@@ -1,5 +1,4 @@
 using biblioteca_fc_api.Data;
-using biblioteca_fc_api.Dtos;
 using biblioteca_fc_api.Models;
 using biblioteca_fc_api.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
