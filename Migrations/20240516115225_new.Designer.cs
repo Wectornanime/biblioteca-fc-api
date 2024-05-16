@@ -11,8 +11,8 @@ using biblioteca_fc_api.Data;
 namespace biblioteca_fc_api.Migrations
 {
     [DbContext(typeof(BibiotecaDbContext))]
-    [Migration("20240512160819_UpdateCategory")]
-    partial class UpdateCategory
+    [Migration("20240516115225_new")]
+    partial class @new
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -93,6 +93,10 @@ namespace biblioteca_fc_api.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("UserId");
+
                     b.ToTable("Loans");
                 });
 
@@ -146,6 +150,25 @@ namespace biblioteca_fc_api.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("biblioteca_fc_api.Models.LoanModel", b =>
+                {
+                    b.HasOne("biblioteca_fc_api.Models.BookModel", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("biblioteca_fc_api.Models.UserModel", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("biblioteca_fc_api.Models.CategoryModel", b =>

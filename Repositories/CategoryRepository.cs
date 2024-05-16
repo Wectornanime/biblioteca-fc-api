@@ -13,29 +13,51 @@ namespace biblioteca_fc_api.Repositories
             _dbContext = bibiotecaDbContext;
         }
 
-        public Task<List<CategoryModel>> CreateCategory(CategoryModel category)
+        public async Task<List<CategoryModel>> CreateCategory(CategoryModel category)
         {
-            throw new NotImplementedException();
+            await _dbContext.Categorys.AddAsync(category);
+            await _dbContext.SaveChangesAsync();
+            return await _dbContext.Categorys.ToListAsync();;
         }
 
-        public Task<List<CategoryModel>> FindAllCategorys()
+        public async Task<List<CategoryModel>> FindAllCategorys()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Categorys.ToListAsync();
         }
 
-        public Task<CategoryModel> FindCategoryById(int id)
+        public async Task<CategoryModel> FindCategoryById(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Categorys.FindAsync(id);
         }
 
-        public Task<CategoryModel> UpdateCategory(CategoryModel category, int id)
+        public async Task<CategoryModel> UpdateCategory(CategoryModel category, int id)
         {
-            throw new NotImplementedException();
+            CategoryModel categoryData = await FindCategoryById(id);
+
+            if (categoryData == null)
+            {
+                throw new Exception("Book not foud!");
+            }
+
+            categoryData.Name = category.Name;
+
+            _dbContext.Categorys.Update(categoryData);
+            await _dbContext.SaveChangesAsync();
+
+            return categoryData;
         }
         
-        public Task<bool> RemoveCategory(int id)
+        public async Task<bool> RemoveCategory(int id)
         {
-            throw new NotImplementedException();
+            var category = await _dbContext.Categorys.FindAsync(id);
+            if (category == null)
+            {
+                throw new Exception("Category not foud!");
+            }
+            _dbContext.Categorys.Remove(category);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
         }
     }
 }

@@ -45,7 +45,7 @@ namespace biblioteca_fc_api.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Books", (string)null);
+                    b.ToTable("Books");
                 });
 
             modelBuilder.Entity("biblioteca_fc_api.Models.CategoryModel", b =>
@@ -61,7 +61,7 @@ namespace biblioteca_fc_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categorys", (string)null);
+                    b.ToTable("Categorys");
                 });
 
             modelBuilder.Entity("biblioteca_fc_api.Models.LoanModel", b =>
@@ -90,7 +90,11 @@ namespace biblioteca_fc_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Loans", (string)null);
+                    b.HasIndex("BookId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Loans");
                 });
 
             modelBuilder.Entity("biblioteca_fc_api.Models.PenaltyModel", b =>
@@ -110,7 +114,7 @@ namespace biblioteca_fc_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Penaltys", (string)null);
+                    b.ToTable("Penaltys");
                 });
 
             modelBuilder.Entity("biblioteca_fc_api.Models.UserModel", b =>
@@ -131,7 +135,7 @@ namespace biblioteca_fc_api.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users", (string)null);
+                    b.ToTable("Users");
                 });
 
             modelBuilder.Entity("biblioteca_fc_api.Models.BookModel", b =>
@@ -143,6 +147,25 @@ namespace biblioteca_fc_api.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("biblioteca_fc_api.Models.LoanModel", b =>
+                {
+                    b.HasOne("biblioteca_fc_api.Models.BookModel", "Book")
+                        .WithMany()
+                        .HasForeignKey("BookId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("biblioteca_fc_api.Models.UserModel", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Book");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("biblioteca_fc_api.Models.CategoryModel", b =>
