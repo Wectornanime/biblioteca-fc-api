@@ -11,5 +11,8 @@ namespace biblioteca_fc_api.Models
         public int BookId { get; set; }
         public int UserId { get; set; }
         public LoanStatus Status { get; set; }
+
+        public virtual BookModel? Book { get; set; }
+        public virtual UserModel? User { get; set; }
     }
 }

@@ -39,7 +39,8 @@ namespace biblioteca_fc_api.Controllers
         public async Task<ActionResult<UserModel>> UpdateUser([FromBody] UserModel userModel, int id)
         {
             var user = await _userRepository.FindUserById(id);
-            if (user == null){
+            if (user == null)
+            {
                 return BadRequest("User not foud!");
             }
             userModel.Id = id;
@@ -51,12 +52,19 @@ namespace biblioteca_fc_api.Controllers
         public async Task<ActionResult<UserModel>> RemoveUser(int id)
         {
             var user = await _userRepository.FindUserById(id);
-            if (user == null){
+            if (user == null)
+            {
                 return BadRequest("User not foud!");
             }
 
             bool isRemoved = await _userRepository.RemoveUser(id);
             return Ok(isRemoved);
+        }
+
+        [HttpPost("{id}/loan")]
+        public ActionResult<int> Teste(int id)
+        {
+            return Ok(id);
         }
     }
 }
