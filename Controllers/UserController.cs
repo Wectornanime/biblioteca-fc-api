@@ -60,11 +60,5 @@ namespace biblioteca_fc_api.Controllers
             bool isRemoved = await _userRepository.RemoveUser(id);
             return Ok(isRemoved);
         }
-
-        [HttpPost("{id}/loan")]
-        public ActionResult<int> Teste(int id)
-        {
-            return Ok(id);
-        }
     }
 }
