@@ -1,3 +1,4 @@
+using biblioteca_fc_api.Dtos;
 using biblioteca_fc_api.Models;
 using biblioteca_fc_api.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ namespace biblioteca_fc_api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<LoanModel>>> CreateLoan([FromBody] LoanModel loanModel)
+        public async Task<ActionResult<List<LoanModel>>> CreateLoan([FromBody] CreateLoanDto loanModel)
         {
             List<LoanModel> loans = await _loanRepository.CreateLoan(loanModel);
             return Ok(loans);
