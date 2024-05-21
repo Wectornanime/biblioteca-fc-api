@@ -43,7 +43,7 @@ namespace biblioteca_fc_api.Repositories
 
         public async Task<LoanModel> UpdateLoan(LoanModel loan, int id)
         {
-            LoanModel loanData = await FindLoanById(id);
+            LoanModel loanData = await _dbContext.Loans.FindAsync(id);
 
             if (loanData == null)
             {
@@ -51,6 +51,7 @@ namespace biblioteca_fc_api.Repositories
             }
 
             loanData.Status = loan.Status;
+            loanData.ReturnDate = DateTime.Now;
 
             _dbContext.Loans.Update(loanData);
             await _dbContext.SaveChangesAsync();

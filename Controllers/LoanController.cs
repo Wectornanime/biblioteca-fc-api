@@ -74,5 +74,22 @@ namespace biblioteca_fc_api.Controllers
             LoanModel newLoanData = await _loanRepository.UpdateLoan(loanModel, id);
             return Ok(newLoanData);
         }
+
+        [HttpPost("/back")]
+        public async Task<ActionResult<LoanModel>> GetBackLoan([FromBody] GetBackLoanDto body)
+        {
+            var loan = await _loanRepository.FindLoanById(body.LoanId);
+            if (loan == null)
+            {
+                return BadRequest("Loan not foud!");
+            }
+            
+            var newLoanData = new LoanModel {
+                Status = Enums.LoanStatus.Fechado
+            };
+
+            LoanModel loans = await _loanRepository.UpdateLoan(newLoanData, body.LoanId);
+            return Ok(loans);
+        }
     }
 }
