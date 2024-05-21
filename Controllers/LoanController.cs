@@ -10,14 +10,30 @@ namespace biblioteca_fc_api.Controllers
     public class LoanController : ControllerBase
     {
         private readonly ILoanRepository _loanRepository;
-        public LoanController(ILoanRepository loanRepository)
+        private readonly IUserRepository _userRepository;
+        private readonly IBookRepository _bookRepository;
+        public LoanController(ILoanRepository loanRepository, IUserRepository userRepository, IBookRepository bookRepository)
         {
             _loanRepository = loanRepository;
+            _userRepository = userRepository;
+            _bookRepository = bookRepository;
         }
 
         [HttpPost]
         public async Task<ActionResult<List<LoanModel>>> CreateLoan([FromBody] CreateLoanDto loanModel)
         {
+            var user = await _userRepository.FindUserById(loanModel.UserId);
+            if (user == null)
+            {
+                return BadRequest("User not foud!");
+            }
+
+            var book = await _bookRepository.FindBookById(loanModel.BookId);
+            if (book == null)
+            {
+                return BadRequest("Book not foud!");
+            }
+
             List<LoanModel> loans = await _loanRepository.CreateLoan(loanModel);
             return Ok(loans);
         }
@@ -33,6 +49,10 @@ namespace biblioteca_fc_api.Controllers
         public async Task<ActionResult<LoanModel>> FindLoanById(int id)
         {
             LoanModel loan = await _loanRepository.FindLoanById(id);
+            if (loan == null)
+            {
+                return BadRequest("Loan not foud!");
+            }
             return Ok(loan);
         }
 
