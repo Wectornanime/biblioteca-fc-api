@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("biblioteca-fc-api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3abc805fa7d225937a84477b5b6b764dda7e746")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3f863eee938ddb08f29879a967da6ec283d03c4c")]
 [assembly: System.Reflection.AssemblyProductAttribute("biblioteca-fc-api")]
 [assembly: System.Reflection.AssemblyTitleAttribute("biblioteca-fc-api")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

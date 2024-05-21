@@ -34,6 +34,11 @@ namespace biblioteca_fc_api.Controllers
                 return BadRequest("Book not foud!");
             }
 
+            var loansActived = await _loanRepository.CountActiveLoansByUserId(loanModel.UserId);
+            if (loansActived >= 3){
+                return BadRequest("the user has reached the loan limit");
+            }
+
             List<LoanModel> loans = await _loanRepository.CreateLoan(loanModel);
             return Ok(loans);
         }

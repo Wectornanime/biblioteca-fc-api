@@ -48,5 +48,12 @@ namespace biblioteca_fc_api.Repositories
         {
             throw new NotImplementedException();
         }
+
+        public async Task<int> CountActiveLoansByUserId(int id)
+        {
+            return await _dbContext.Loans
+                .Where(loan => loan.UserId == id && loan.Status == Enums.LoanStatus.EmAberto)
+                .CountAsync();
+        }
     }
 }
