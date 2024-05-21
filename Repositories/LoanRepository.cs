@@ -18,10 +18,12 @@ namespace biblioteca_fc_api.Repositories
         {
             var _loan = new LoanModel
             {
-                BookId = loan.BookId,
-                Status = Enums.LoanStatus.EmAberto,
                 LoanDate = DateTime.Now,
-                UserId = loan.UserId
+                ExpectedReturnDate = DateTime.Now.AddDays(7),
+                ReturnDate = null,
+                BookId = loan.BookId,
+                UserId = loan.UserId,
+                Status = Enums.LoanStatus.EmAberto,
             };
 
             await _dbContext.Loans.AddAsync(_loan);
