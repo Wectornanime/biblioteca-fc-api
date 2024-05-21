@@ -29,24 +29,31 @@ namespace biblioteca_fc_api.Repositories
             return await _dbContext.Loans.ToListAsync();
         }
 
-        public Task<List<LoanModel>> FindAllLoans()
+        public async Task<List<LoanModel>> FindAllLoans()
         {
-            throw new NotImplementedException();
+            return await _dbContext.Loans.ToListAsync();
         }
 
-        public Task<LoanModel> FindLoanById(int id)
+        public async Task<LoanModel> FindLoanById(int id)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Loans.FindAsync(id);
         }
 
-        public Task<LoanModel> UpdateLoan(LoanModel loan, int id)
+        public async Task<LoanModel> UpdateLoan(LoanModel loan, int id)
         {
-            throw new NotImplementedException();
-        }
+            LoanModel loanData = await FindLoanById(id);
 
-        public Task<bool> RemoveLoan(int id)
-        {
-            throw new NotImplementedException();
+            if (loanData == null)
+            {
+                throw new Exception("Book not foud!");
+            }
+
+            loanData.Status = loan.Status;
+
+            _dbContext.Loans.Update(loanData);
+            await _dbContext.SaveChangesAsync();
+
+            return loanData;
         }
 
         public async Task<int> CountActiveLoansByUserId(int id)

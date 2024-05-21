@@ -35,7 +35,8 @@ namespace biblioteca_fc_api.Controllers
             }
 
             var loansActived = await _loanRepository.CountActiveLoansByUserId(loanModel.UserId);
-            if (loansActived >= 3){
+            if (loansActived >= 3)
+            {
                 return BadRequest("the user has reached the loan limit");
             }
 
@@ -72,19 +73,6 @@ namespace biblioteca_fc_api.Controllers
             loanModel.Id = id;
             LoanModel newLoanData = await _loanRepository.UpdateLoan(loanModel, id);
             return Ok(newLoanData);
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<LoanModel>> RemoveLoan(int id)
-        {
-            var loan = await _loanRepository.FindLoanById(id);
-            if (loan == null)
-            {
-                return BadRequest("Loan not foud!");
-            }
-
-            bool isRemoved = await _loanRepository.RemoveLoan(id);
-            return Ok(isRemoved);
         }
     }
 }
