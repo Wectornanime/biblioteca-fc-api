@@ -27,12 +27,7 @@ namespace biblioteca_fc_api.Repositories
 
         public async Task<UserModel> FindUserById(int id)
         {
-            var user = await _dbContext.Users.FindAsync(id);
-            if (user == null)
-            {
-                throw new Exception("User not foud!");
-            }
-            return user;
+            return await _dbContext.Users.FindAsync(id);
         }
 
         public async Task<UserModel> UpdateUser(UserModel user, int id)
