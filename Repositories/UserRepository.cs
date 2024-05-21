@@ -27,7 +27,7 @@ namespace biblioteca_fc_api.Repositories
 
         public async Task<UserModel> FindUserById(int id)
         {
-            return await _dbContext.Users.FindAsync(id);
+            return await _dbContext.Users.FindAsync(id);    
         }
 
         public async Task<UserModel> UpdateUser(UserModel user, int id)
