@@ -79,17 +79,32 @@ namespace biblioteca_fc_api.Controllers
         public async Task<ActionResult<LoanModel>> GetBackLoan([FromBody] GetBackLoanDto body)
         {
             var loan = await _loanRepository.FindLoanById(body.LoanId);
+            DateTime currentDate = DateTime.Now;
+
             if (loan == null)
             {
                 return BadRequest("Loan not foud!");
             }
-            
-            var newLoanData = new LoanModel {
+            BookModel book = await _bookRepository.FindBookById(loan.BookId);
+
+            var newLoanData = new LoanModel
+            {
                 Status = Enums.LoanStatus.Fechado
             };
 
             LoanModel loans = await _loanRepository.UpdateLoan(newLoanData, body.LoanId);
-            return Ok(loans);
+
+            if (currentDate > loan.ExpectedReturnDate)
+            {
+                TimeSpan difference = currentDate - loan.ExpectedReturnDate;
+                double penaltyValue = 2 * Math.Floor(difference.TotalDays);
+
+                double totalValue = book.Value + penaltyValue;
+
+                return Ok($"Emprestimo devolvido com sucesso! Porem com atraso de {Math.Floor(difference.TotalDays)} dias, com isso você tem uma multa de R${penaltyValue:F2}, com o valor do livro R${book.Value:F2}, total de R${totalValue:F2}");
+            }
+
+            return Ok($"Emprestimo devolvido com sucesso! Valor do livro R${book.Value:F2}, total de R${book.Value:F2}");
         }
     }
 }
