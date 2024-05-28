@@ -18,6 +18,7 @@ namespace biblioteca_fc_api.Data.Map
 
             builder.HasOne(x => x.Book);
             builder.HasOne(x => x.User);
+            builder.HasOne(x => x.Penalty);
         }
     }
 }

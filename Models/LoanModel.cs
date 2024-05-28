@@ -14,5 +14,6 @@ namespace biblioteca_fc_api.Models
 
         public virtual BookModel? Book { get; set; }
         public virtual UserModel? User { get; set; }
+        public virtual PenaltyModel? Penalty { get; set; }
     }
 }

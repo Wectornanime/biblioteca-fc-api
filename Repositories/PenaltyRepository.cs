@@ -13,29 +13,11 @@ namespace biblioteca_fc_api.Repositories
             _dbContext = bibiotecaDbContext;
         }
 
-        public Task<List<PenaltyModel>> CreatePenalty(PenaltyModel penalty)
+        public async Task<List<PenaltyModel>> CreatePenalty(PenaltyModel penalty)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<List<PenaltyModel>> FindAllPenaltys()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<PenaltyModel> FindPenaltyById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<PenaltyModel> UpdatePenalty(PenaltyModel penalty, int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<bool> RemovePenalty(int id)
-        {
-            throw new NotImplementedException();
+            await _dbContext.Penaltys.AddAsync(penalty);
+            await _dbContext.SaveChangesAsync();
+            return await _dbContext.Penaltys.ToListAsync();
         }
     }
 }

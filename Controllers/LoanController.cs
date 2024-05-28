@@ -12,11 +12,13 @@ namespace biblioteca_fc_api.Controllers
         private readonly ILoanRepository _loanRepository;
         private readonly IUserRepository _userRepository;
         private readonly IBookRepository _bookRepository;
-        public LoanController(ILoanRepository loanRepository, IUserRepository userRepository, IBookRepository bookRepository)
+        private readonly IPenaltyRepository _penaltyRepository;
+        public LoanController(ILoanRepository loanRepository, IUserRepository userRepository, IBookRepository bookRepository, IPenaltyRepository penaltyRepository)
         {
             _loanRepository = loanRepository;
             _userRepository = userRepository;
             _bookRepository = bookRepository;
+            _penaltyRepository = penaltyRepository;
         }
 
         [HttpPost]
@@ -100,6 +102,15 @@ namespace biblioteca_fc_api.Controllers
                 double penaltyValue = 2 * Math.Floor(difference.TotalDays);
 
                 double totalValue = book.Value + penaltyValue;
+
+                PenaltyModel penalty = new PenaltyModel
+                {
+                    DalayDay = (int)Math.Floor(difference.TotalDays),
+                    PenaltyValue = (float)penaltyValue,
+                    LoanId = body.LoanId
+                };
+
+                await _penaltyRepository.CreatePenalty(penalty);
 
                 return Ok($"Emprestimo devolvido com sucesso! Porem com atraso de {Math.Floor(difference.TotalDays)} dias, com isso você tem uma multa de R${penaltyValue:F2}, com o valor do livro R${book.Value:F2}, total de R${totalValue:F2}");
             }
