@@ -1,3 +1,4 @@
+using biblioteca_fc_api.Dtos;
 using biblioteca_fc_api.Models;
 using biblioteca_fc_api.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -15,7 +16,7 @@ namespace biblioteca_fc_api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<List<BookModel>>> BookModel([FromBody] BookModel book)
+        public async Task<ActionResult<List<BookModel>>> BookModel([FromBody] CreateBookDto book)
         {
             List<BookModel> books = await _bookRepository.CreateBook(book);
             return Ok(books);

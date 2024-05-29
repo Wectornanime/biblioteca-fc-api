@@ -1,4 +1,5 @@
 using biblioteca_fc_api.Data;
+using biblioteca_fc_api.Dtos;
 using biblioteca_fc_api.Models;
 using biblioteca_fc_api.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -13,9 +14,17 @@ namespace biblioteca_fc_api.Repositories
             _dbContext = bibiotecaDbContext;
         }
 
-        public async Task<List<BookModel>> CreateBook(BookModel book)
+        public async Task<List<BookModel>> CreateBook(CreateBookDto book)
         {
-            await _dbContext.Books.AddAsync(book);
+            BookModel _book = new BookModel
+            {
+                Name = book.Name,
+                Author = book.Author,
+                Value = book.Value,
+                CategoryId = book.CategoryId,
+            };
+
+            await _dbContext.Books.AddAsync(_book);
             await _dbContext.SaveChangesAsync();
             return await _dbContext.Books.ToListAsync();
         }
@@ -33,7 +42,6 @@ namespace biblioteca_fc_api.Repositories
         public async Task<BookModel> UpdateBook(BookModel book, int id)
         {
             BookModel bookData = await FindBookById(id);
-
             if (bookData == null)
             {
                 throw new Exception("Book not foud!");
