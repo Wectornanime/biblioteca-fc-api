@@ -1,3 +1,9 @@
+using biblioteca_fc_api.Data;
+using biblioteca_fc_api.Repositories;
+using biblioteca_fc_api.Repositories.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using MySql.EntityFrameworkCore.Extensions;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -5,6 +11,19 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddEntityFrameworkMySQL()
+    .AddDbContext<BibiotecaDbContext>(options =>
+        options.UseMySQL(
+            builder.Configuration.GetConnectionString("MySqlConnection")
+        )
+    );
+
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IPenaltyRepository, PenaltyRepository>();
+builder.Services.AddScoped<ILoanRepository, LoanRepository>();
 
 var app = builder.Build();
 
